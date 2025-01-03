@@ -39,7 +39,7 @@ Follow these steps to run the project locally:
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/your-username/fifa_cup_analysis.git
+git clone https://github.com/hsrahh/fifa_cup_analysis.git
 cd fifa_cup_analysis
 ```
 
