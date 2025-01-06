@@ -4,18 +4,35 @@ import os
 
 app = Flask(__name__)
 
-# Load data
-data_file_path = os.path.join('data', 'fifa_data3.csv')
-if os.path.exists(data_file_path):
-    data = pd.read_csv(data_file_path)
+# Create FIFA World Cup data and save it to a CSV file
+data = {
+    'year': [2018, 2018, 2014, 2014, 2010, 2010, 2006, 2006, 2002, 2002],
+    'team': ['France', 'Croatia', 'Germany', 'Argentina', 'Spain', 'Netherlands', 'Italy', 'France', 'Brazil', 'Germany'],
+    'opponent': ['Croatia', 'France', 'Argentina', 'Germany', 'Netherlands', 'Spain', 'France', 'Italy', 'Germany', 'Brazil'],
+    'goals_scored': [4, 2, 1, 0, 1, 0, 1, 1, 2, 0],
+    'goals_conceded': [2, 4, 0, 1, 0, 1, 0, 1, 0, 2],
+    'possession': [54, 46, 60, 40, 55, 45, 50, 50, 53, 47],
+    'shots_on_target': [6, 4, 7, 3, 6, 4, 5, 5, 8, 2],
+    'corners': [7, 3, 8, 2, 5, 3, 4, 6, 5, 4],
+    'result': ['win', 'loss', 'win', 'loss', 'win', 'loss', 'win', 'loss', 'win', 'loss']
+}
+
+# Save the data to a CSV file
+file_path = 'fifa_world_cup_data_advanced.csv'
+df = pd.DataFrame(data)
+df.to_csv(file_path, index=False, encoding='utf-8')
+print(f"CSV file saved to: {file_path}")
+
+# Load the data from the CSV file
+if os.path.exists(file_path):
+    data = pd.read_csv(file_path)
 else:
-    raise FileNotFoundError(f"File not found: {data_file_path}")
+    raise FileNotFoundError(f"File not found: {file_path}")
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/team_data', methods=['POST'])
 @app.route('/team_data', methods=['POST'])
 def team_data():
     try:
@@ -32,8 +49,8 @@ def team_data():
         # Calculate metrics
         matches_played = int(team_data.shape[0])  # Convert to native int
         years_played = team_data['year'].unique().tolist()  # Convert to list
-        matches_won = int(team_data[team_data['outcome'] == 1].shape[0])  # Convert to native int
-        total_goals = int(team_data['goals'].sum())  # Convert to native int
+        matches_won = int(team_data[team_data['result'] == 'win'].shape[0])  # Convert to native int
+        total_goals = int(team_data['goals_scored'].sum())  # Convert to native int
 
         # Return JSON response
         return jsonify({
