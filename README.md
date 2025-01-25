@@ -3,7 +3,7 @@
 # **FIFA Cup Analysis**
 
 ## **Purpose**
-The `fifa_cup_analysis` project is designed to analyze FIFA World Cup data and provide insights into team performance. Users can fetch team-specific statistics, such as matches played, goals scored, and matches won, and save the data as a CSV file for further analysis. This tool is perfect for football enthusiasts, analysts, and researchers.
+The `fifa cup analysis` project is designed to analyze FIFA World Cup data and provide insights into team performance. Users can fetch team-specific statistics, such as matches played, goals scored, and matches won, and save the data as a CSV file for further analysis. This tool is perfect for football enthusiasts, analysts, and researchers.
 
 ---
 
